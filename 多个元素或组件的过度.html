@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+/* 	入场动画样式 */
+		.v-enter{
+			opacity: 0;
+		}		
+		.v-enter-active{
+			transition: opacity 1.5s;
+		}
+/* 出场动画样式 */
+		.v-leave-to{
+			opacity: 0;
+		}
+		.v-leave-active {
+			transition: opacity 1.5s;
+		}
+	</style>	
+</head>
+<body>
+	<div id="root">
+
+		<transition mode="out-in" >	 <!-- mode="out-in"先隐藏再显示 -->
+<!-- 		<div v-if="show" key="hello">Hello!</div>
+<div v-else key="bye">bye bye!</div> -->
+		<component :is="type"></component>
+		</transition> 
+		<button @click="handleChange">点我一下下</button>
+	</div>
+	<script>
+		Vue.component('child',{
+			template:"<div>child</div>"
+		});
+		Vue.component('child-one',{
+			template:"<div>child-one</div>"
+		});
+		new Vue({
+			el:"#root",
+			data:{
+				/*show:true,*/
+				type:'child'
+
+			},
+			methods:{
+				handleChange:function  () {
+					this.type = (this.type == 'child'?'child-one':'child');
+				}
+			}
+
+		});
+	</script>
+</body>
+</html>

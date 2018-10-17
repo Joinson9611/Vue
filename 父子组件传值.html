@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<counter :count="0" @inc="handleChange"></counter>
+		<counter :count="1" @inc="handleChange"></counter>
+		<div>{{total}}</div>
+	</div>
+	<script>
+		var counter = {
+			props:['count'], //属性props 数组内的项要是字符串。
+			template:"<div @click='handleClick'>{{num}}</div>",
+			data:function (){
+				return {
+					num:this.count //既然不能将子组件传回父组件的数据传回那么可以将其赋值给子组件的变量再进行操作
+
+
+				}
+			},
+			methods:{
+				// Vue是单数据流所以下面这种写法不可取，子组件可以通过props向父组件传值，但
+				// 父组件不能再向子组件回传
+				// handleClick:function  () {
+				// 		this.count ++;
+				// }
+				handleClick:function() {
+					this.num ++;
+					this.$emit('inc',1);
+				}
+
+			}
+		};
+		var vm = new Vue({
+			el:"#app",
+			components:{  //这里组件英文要加s ------components
+				counter:counter
+			},
+			data:{
+				total:0
+			},
+			methods:{
+				handleChange:function  (step) {
+					this.total += step;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

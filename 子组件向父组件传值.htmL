@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<input type="text" v-model='inputValue'>
+		<input type="button" value="点击" v-on:click="handleButtonClick">	
+		<ul>
+			<todo-item :content='item'  v-for='item in list'></todo-item><!-- :content相当于 v-bind:content-->
+		</ul>	
+		
+	</div>
+	<script>
+	var todoItem = {
+		props:['content'],//接受数据
+		template:"<li @click='handleItemClick'>{{content}}</li>",//@click相当于v-on:click
+		methods:{
+			handleItemClick:function () {
+				console.log('1');
+			}
+		}		
+	}
+		var app = new Vue({//创建一个VUE实例
+			el:"#root",
+			components:{
+				todoItem:todoItem
+			},
+			data : {
+				list:[],
+				inputValue:""
+			},
+			methods : {
+				handleButtonClick:function () {
+					this.list.push(this.inputValue);
+					this.inputValue = '';
+				}
+			}
+
+		});
+
+	</script>
+</body>
+</html>

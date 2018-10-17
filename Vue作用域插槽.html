@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<row>
+	<!-- 使用插槽传过来的数据，然后根据需要的样式改写模板即可 -->
+		<template slot-scope="props">
+		<!-- 	<li >{{props.item}}</li> -->
+			<h1>{{props.item}}</h1>
+		</template> 
+	</row>
+</div>	
+	<script>
+		Vue.component('row',{	
+			data:function  () {
+				return {
+					list:[1, 2, 3, 4, 5],
+					string:"我爱瑶瑶"
+				}
+			},
+			// slot为了传递数据而用
+			template:`
+			<div>
+				<ul>
+					<slot  v-for="item in list"
+					:item=item
+					></slot>	
+				</ul>
+			</div>	
+			`
+		});
+		var vm = new Vue({
+			el:"#root",
+			data:{}
+		})
+	</script>
+</body>
+</html>

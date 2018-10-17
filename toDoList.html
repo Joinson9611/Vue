@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<input type="text" v-model='inputValue'>
+		<input type="button" value="点击" v-on:click="handleButtonClick">	
+		<ul>
+			<li v-for='item in list'>{{item}}</li>
+			
+		</ul>	
+	</div>
+	<script>
+		var app = new Vue({
+			el:"#root",
+			data : {
+				list:[],
+				inputValue:"",
+
+			},
+			methods : {
+				handleButtonClick:function () {
+					this.list.push(this.inputValue);
+					this.inputValue = '';
+				}
+			},
+
+		});
+
+	</script>
+</body>
+</html>

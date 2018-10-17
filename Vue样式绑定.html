@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.actived{
+			color: red;
+			font-size: 30px;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<!-- Vue样式绑定之对象形式 -->
+<!-- 	<div id="app">
+		<div @click="handleClick" :class="{actived:isAct}">
+			我是多变的
+		</div>
+	</div>
+	
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+					isAct: true 		
+			},
+			methods:{
+				handleClick:function  () {
+					this.isAct = !this.isAct;
+				}
+			}
+		})
+	</script> -->
+	<!-- Vue样式绑定之数组形式 -->
+		<div id="app">
+		<div @click="handleClick" :class="[active]">
+			我是多变的
+		</div>
+	</div>
+	
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+					active: "" 		
+			},
+			methods:{
+				handleClick:function  () {
+					this.active = this.active === "actived"? "": "actived"
+				}
+			}
+		})
+	</script>
+</body>
+</html>

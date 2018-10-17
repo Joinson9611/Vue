@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<row>
+		<p slot="header">header</p>
+		<p slot="footer">footer</p>
+	</row>
+</div>	
+	<script>
+	/*slot标签要被DIV包裹起来才能起作用*/
+		Vue.component('row',{	
+			template:
+			`<div>
+			<slot name="header"></slot>
+			<p>content</p>
+			<slot name="footer"></slot>
+			</div>  
+			`
+		});
+		var vm = new Vue({
+			el:"#root",
+			data:{}
+		})
+	</script>
+</body>
+</html>

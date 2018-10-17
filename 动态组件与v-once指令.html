@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>	
+</head>
+<body>
+	<div id="app">
+<!-- 		<counter-one v-if="type === 'child-one'">Child-One</counter-one>
+<counter-two v-if="type === 'child-two'">Child-Two</counter-two> -->
+		<component :is='type'></component>
+		<button @click='handleClick'>Just click it</button>
+	</div>
+	<script>
+		/*标签的v-once作用：将标签及其内容缓存到内存中，在切换时可以提升性能*/
+		Vue.component("child-one",{
+			template:'<div v-once>Child-One</div>'
+		});
+		Vue.component("child-two",{
+			template:'<div v-once>Child-Two</div>'
+		});
+		new Vue({
+			el:"#app",
+			data:{
+				type:'child-one',
+
+				},
+					methods:{
+					handleClick:function  () {
+						this.type = (this.type === 'child-one'?'child-two':'child-one')
+					}			
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="./animate.css">
+	<style>
+/* 	出场动画enter样式 */
+		.v-enter{
+			opacity: 0;
+		}		
+		.v-enter-active{
+			transition: opacity 3s;
+		}
+/* 离场动画leave样式 */
+		.v-leave-to{
+			opacity: 0;
+		}
+		.v-leave-active {
+			transition: opacity 3s;
+		}
+	</style>	
+</head>
+<body>
+	<div id="root">
+		<transition
+			type="transition"
+			name="fade"
+			appear
+			enter-active-class="animated swing fade-enter-active"
+			leave-active-class="animated swing fade-leave-active"
+			appear-active-class="animated swing"
+
+		>	
+		<div v-if="show">LOVE 瑶瑶</div>
+		</transition> 
+		<button @click="show = !show">点我一下下</button>
+	</div>
+	<script>
+		new Vue({
+			el:"#root",
+			data:{
+				show:true
+			}
+
+		});
+	</script>
+</body>
+</html>

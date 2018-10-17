@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="velocity.js">
+</head>
+<body>
+	<div id="root">
+		<transition		
+			@before-enter="beforeEnter"
+			@enter="enter"
+			@after-enter="afterEnter"
+		>	
+			<div v-if="show">LOVE 瑶瑶</div>
+		</transition> 
+		<button @click="show = !show">点我一下下</button>
+	</div>
+	<script>
+		new Vue({
+			el:"#root",
+			data:{
+				show:true
+			},
+			methods:{
+/*				beforeEnter:function (el) {
+					el.style.color='blue';
+				},
+				enter:function  (el,done) {
+					setTimeout(() => {
+						el.style.color = "green";
+						
+					},2000)
+					setTimeout( () => {
+						done(); //回调函数 动画结束标志
+					},4000)
+
+				},
+				afterEnter:function  (el) {
+					el.style.color="black"
+				}*/
+				beforeEnter:function (el) {
+					el.style.opacity = 0;
+				},
+				enter:function  (el,done) {
+					Velocity(el,
+					{
+						opacity:1
+					},
+					{
+						duration:1000,
+						complete:done
+				 	})
+				},
+				afterEnter:function  (el) {
+					console.log('动画结束');
+				}							
+			}
+
+		});
+	</script>
+</body>
+</html>

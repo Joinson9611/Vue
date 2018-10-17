@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<input type="text" v-model='inputValue'>
+		<input type="button" value="点击" v-on:click="handleButtonClick">	
+		<ul>
+			<!-- v-for语法 通过list决定到底要循环多少个todolist组件 ，同时把每个list项的内容通过v-bind的语法借助content这个变量 传给了todoitem这个子组件 -->
+			<todo-item v-bind:content='item'  v-for='item in list'></todo-item>
+		</ul>	
+		
+		
+	</div>
+	<script>
+	// 全局组件的使用
+	// Vue.component("TodoItem",{//定义一个全局todoitem组件，可以直接在模板里使用todoitem
+	// 	props:['content'],//接受数据
+	// 	template:"<li>{{content}}</li>"
+	// });
+	// 局部组件的使用
+	var todoItem = {
+		props:['content'],//接受数据
+		template:"<li>{{content}}</li>"		
+	}
+		var app = new Vue({//创建一个VUE实例
+			el:"#root",
+			components:{
+				TodoItem:todoItem
+			},
+			data : {
+				list:[],
+				inputValue:"",
+
+
+			},
+			methods : {
+				handleButtonClick:function () {
+					this.list.push(this.inputValue);
+					this.inputValue = '';
+				}
+			}
+
+		});
+
+	</script>
+</body>
+</html>
